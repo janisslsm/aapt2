@@ -153,6 +153,9 @@ add_library(libaapt2 STATIC
 
   target_include_directories(libaapt2 PRIVATE ${INCLUDES})
   target_compile_options(libaapt2 PRIVATE ${COMPILE_FLAGS})
+  if(ANDROID_ABI STREQUAL armeabi-v7a)
+      set_target_properties(libaapt2 PROPERTIES COMPILE_FLAGS -mfpu=vfpv3-d16)
+  endif()
 
   add_executable(aapt2
   ${SRC}/base/tools/aapt2/Main.cpp
