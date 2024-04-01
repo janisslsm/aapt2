@@ -1,4 +1,16 @@
 Submodule src/base contains modified content
+diff --git a/src/base/Android.mk b/src/base/Android.mk
+index d9e202c9305c..629fc0cf0c34 100644
+--- a/src/base/Android.mk
++++ b/src/base/Android.mk
+@@ -39,6 +39,7 @@ ifneq ($(ANDROID_BUILD_EMBEDDED),true)
+ # specified relative to the root of the build tree.
+ # ============================================================
+ include $(CLEAR_VARS)
++LOCAL_ARM_NEON := false
+ 
+ # sdk.atree needs to copy the whole dir: $(OUT_DOCS)/offline-sdk to the final zip.
+ # So keep offline-sdk-timestamp target here, and unzip offline-sdk-docs.zip to
 diff --git a/src/base/tools/aapt2/ResourceTable.cpp b/src/base/tools/aapt2/ResourceTable.cpp
 index 8ab1493c6ab3..3a855f0f6866 100644
 --- a/src/base/tools/aapt2/ResourceTable.cpp
