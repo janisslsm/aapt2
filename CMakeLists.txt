@@ -14,6 +14,9 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fcolor-diagnostics -fPIC -Wno-attributes -s
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fcolor-diagnostics -fPIC -Wno-attributes -std=gnu++2a")
 # static link
 set(CMAKE_EXE_LINKER_FLAGS "-static")
+if(ANDROID_ABI STREQUAL armeabi-v7a)
+    set_target_properties(${TARGET} PROPERTIES COMPILE_FLAGS -mfpu=vfpv3-d16)
+endif()
 
 # platform tools version
 # see the patches/other/platform_tools_version.h
