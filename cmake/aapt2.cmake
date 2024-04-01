@@ -36,11 +36,21 @@ endif()
 
 set_source_files_properties(${AAPT2_PROTO_SRC} ${AAPT2_PROTO_HDRS}
                             PROPERTIES GENERATED TRUE)
-set(COMPILE_FLAGS
-  -Wno-unused-parameter
-  -Wno-missing-field-initializers
-  -fno-exceptions 
-  -fno-rtti)
+if(ANDROID_ABI STREQUAL armeabi-v7a)
+    set(COMPILE_FLAGS
+      -Wno-unused-parameter
+      -Wno-missing-field-initializers
+      -fno-exceptions 
+      -fno-rtti
+      -mfpu=vfpv3-d16)
+else()
+    set(COMPILE_FLAGS
+      -Wno-unused-parameter
+      -Wno-missing-field-initializers
+      -fno-exceptions 
+      -fno-rtti)
+endif()
+
 
 set(INCLUDES
     ${SRC}/base/tools/aapt2
@@ -150,10 +160,6 @@ add_library(libaapt2 STATIC
   ${SRC}/base/tools/aapt2/ValueTransformer.cpp
   ${AAPT2_PROTO_SRC}
   ${AAPT2_PROTO_HDRS})
-
-  if(ANDROID_ABI STREQUAL armeabi-v7a)
-      set_target_properties(libaapt2 PROPERTIES COMPILE_FLAGS -mfpu=vfpv3-d16)
-  endif()
   
   target_include_directories(libaapt2 PRIVATE ${INCLUDES})
   target_compile_options(libaapt2 PRIVATE ${COMPILE_FLAGS})
