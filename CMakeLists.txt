@@ -23,7 +23,7 @@ endif()
 set(TOOLS_VERSION 33.0.1)
 set(SRC ${PROJECT_SOURCE_DIR}/src)
 
-if(STREQUAL "armeabi-v7a")
+if(ANDROID_ABI STREQUAL "armeabi-v7a")
     add_compile_options(-Wno-attributes -mfpu=vfpv3-d16)
 end
 
