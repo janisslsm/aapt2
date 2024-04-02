@@ -23,6 +23,10 @@ endif()
 set(TOOLS_VERSION 33.0.1)
 set(SRC ${PROJECT_SOURCE_DIR}/src)
 
+if(STREQUAL "armeabi-v7a")
+    add_compile_options(-Wno-attributes -mfpu=vfpv3-d16)
+end
+
 # 64-bit off_t for lseek.
 add_definitions(-D_FILE_OFFSET_BITS=64)
 
